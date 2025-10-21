@@ -1,0 +1,1 @@
+export default function Tag({label}:{label:string}){return <span className='inline-block rounded-pill bg-gray-100 text-gray-800 text-xs px-3 py-1 border border-gray-200'>{label}</span>}

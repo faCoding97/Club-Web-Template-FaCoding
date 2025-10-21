@@ -1,0 +1,106 @@
+{
+  "site": {
+    "name": "ElixFit Club",
+    "baseUrl": "https://elixfit.elixflare.com",
+    "logo": "/logo/logo.png"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "Classes",
+      "href": "/classes"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
+  ],
+  "hero": {
+    "title": "Stronger. Faster. Fitter.",
+    "subtitle": "Group classes, pro coaches, and a community that keeps you moving.",
+    "ctaLabel": "Explore Classes",
+    "ctaHref": "/classes",
+    "image": "/images/hero/fitness-hero.png"
+  },
+  "classes": [
+    {
+      "slug": "hiit-burn",
+      "title": "HIIT Burn",
+      "level": "Intermediate",
+      "duration": "45 mins",
+      "schedule": "Mon/Wed/Fri \u2014 6:00 AM",
+      "thumbnail": "/images/classes/hiit.png",
+      "tags": [
+        "HIIT",
+        "Cardio",
+        "Metcon"
+      ],
+      "shortDescription": "High-intensity intervals to torch calories and boost endurance.",
+      "description": "HIIT Burn alternates intense bursts with quick recovery to push your limits safely. Build stamina and burn fat efficiently.",
+      "highlights": [
+        "Coach-led intervals",
+        "No equipment required",
+        "Beginner scaling options"
+      ]
+    },
+    {
+      "slug": "strength-foundations",
+      "title": "Strength Foundations",
+      "level": "Beginner",
+      "duration": "60 mins",
+      "schedule": "Tue/Thu \u2014 5:30 PM",
+      "thumbnail": "/images/classes/strength.png",
+      "tags": [
+        "Strength",
+        "Technique"
+      ],
+      "shortDescription": "Learn safe lifting technique and build total-body strength.",
+      "description": "Perfect for newcomers or those returning from a break. Master the squat, hinge, push, and pull with proper form.",
+      "highlights": [
+        "Form-first coaching",
+        "Accessory work",
+        "Progress tracking"
+      ]
+    },
+    {
+      "slug": "mobility-flow",
+      "title": "Mobility Flow",
+      "level": "All Levels",
+      "duration": "40 mins",
+      "schedule": "Sat \u2014 9:00 AM",
+      "thumbnail": "/images/classes/mobility.png",
+      "tags": [
+        "Mobility",
+        "Recovery",
+        "Flexibility"
+      ],
+      "shortDescription": "Feel better, move better\u2014guided mobility for joints and tissue.",
+      "description": "Loosen tight hips and shoulders with a flow that blends stretches and breathwork to improve range of motion.",
+      "highlights": [
+        "Gentle flow",
+        "Breathwork",
+        "Great for rest days"
+      ]
+    }
+  ],
+  "about": {
+    "heading": "About ElixFit",
+    "content": "We build strong, healthy habits through coached group classes and proven training cycles. Everyone is welcome\u2014each session is tailored to your level."
+  },
+  "contact": {
+    "email": "hello@elixflare.com",
+    "phone": "+27 60 000 0000",
+    "location": "Port Elizabeth, South Africa",
+    "note": "Demo UI only; this form does not send messages."
+  },
+  "footer": {
+    "year": 2025
+  }
+}

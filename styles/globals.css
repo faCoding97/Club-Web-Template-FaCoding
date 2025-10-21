@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html, body { @apply bg-white text-gray-900; }
+:focus-visible { outline: 2px solid theme('colors.fit.500'); outline-offset: 2px; }
+.btn-pill { @apply inline-flex items-center justify-center rounded-pill px-6 py-3 font-medium shadow-soft transition bg-fit-600 text-white hover:bg-fit-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fit-500; transform: translateZ(0); }
+.btn-pill:hover { transform: translateY(-1px) rotate(-.2deg); }
+.card { @apply rounded-2xl border border-gray-200 bg-white shadow-soft; }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; } }
