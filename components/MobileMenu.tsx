@@ -1,1 +1,83 @@
-'use client'; import Link from 'next/link'; import {useEffect,useRef} from 'react'; type Props={isOpen:boolean;onClose:()=>void;nav:{label:string;href:string}[]}; export default function MobileMenu({isOpen,onClose,nav}:Props){ const ref=useRef<HTMLDivElement>(null); useEffect(()=>{ if(isOpen){ const b=document.body,prev=b.style.overflow; b.style.overflow='hidden'; (ref.current?.querySelector('a') as HTMLElement|undefined)?.focus(); return ()=>{b.style.overflow=prev};}},[isOpen]); useEffect(()=>{ function onKey(e:KeyboardEvent){ if(e.key==='Escape') onClose(); if(e.key==='Tab'&&ref.current){ const f=Array.from(ref.current.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')).filter(el=>!el.hasAttribute('disabled')); const first=f[0],last=f[f.length-1]; if(!first||!last) return; if(e.shiftKey&&document.activeElement===first){ last.focus(); e.preventDefault(); } else if(!e.shiftKey&&document.activeElement===last){ first.focus(); e.preventDefault(); } } } if(isOpen){ document.addEventListener('keydown',onKey); return ()=>document.removeEventListener('keydown',onKey);} },[isOpen,onClose]); if(!isOpen) return null; return(<div className='fixed inset-0 z-50' role='dialog' aria-modal='true' aria-labelledby='mobile-menu-title' onClick={e=>{ if(e.target===e.currentTarget) onClose(); }}><div className='absolute inset-0 bg-black/30'/><div ref={ref} className='absolute right-0 top-0 h-full w-80 max-w-[85%] bg-white shadow-soft p-6 focus:outline-none'><div className='flex items-center justify-between'><h2 id='mobile-menu-title' className='text-lg font-semibold'>Menu</h2><button onClick={onClose} aria-label='Close menu' className='rounded p-2 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fit-500'>✕</button></div><nav className='mt-6 grid gap-2'>{nav.map(i=>(<Link key={i.href} href={i.href} className='block rounded px-3 py-2 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-fit-500' onClick={onClose}>{i.label}</Link>))}</nav></div></div>); }
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect } from "react";
+
+export default function MobileMenu({ open, setOpen, nav, site }) {
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) =>
+      e.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [setOpen]);
+
+  return (
+    <div
+      className={`fixed inset-0 z-50 transition-all duration-300 ${
+        open ? "opacity-100 visible" : "opacity-0 invisible"
+      }`}
+    >
+      {/* بک‌دراپ تیره */}
+      <div
+        onClick={() => setOpen(false)}
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+      />
+
+      {/* پنل منو */}
+      <div
+        className={`absolute right-0 top-0 h-full w-72 bg-white shadow-2xl border-l border-gray-200 transform transition-transform duration-300 ${
+          open ? "translate-x-0" : "translate-x-full"
+        } flex flex-col`}
+      >
+        <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 bg-gray-50">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3"
+          >
+            <Image
+              src={site.logo}
+              alt={site.name}
+              width={32}
+              height={32}
+              className="rounded-full"
+            />
+            <span className="font-semibold text-gray-900">{site.name}</span>
+          </Link>
+          <button
+            onClick={() => setOpen(false)}
+            aria-label="Close menu"
+            className="p-2 rounded-lg hover:bg-gray-200 text-gray-700"
+          >
+            ✕
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-2 p-4 bg-gray-50 text-gray-900">
+          {nav
+            .filter((i) => !["contact", "Contact", "CONTACT"].includes(i.label))
+            .map((i) => (
+              <Link
+                key={i.href}
+                href={i.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-3 py-2 text-gray-800 hover:bg-gray-100 font-medium transition"
+              >
+                {i.label}
+              </Link>
+            ))}
+        </nav>
+
+        <div className="mt-auto border-t border-gray-200 p-4 bg-gray-50 text-gray-900">
+          <Link
+            href="/contact"
+            onClick={() => setOpen(false)}
+            className="block w-full rounded-lg bg-gray-900 text-white text-center py-2 font-medium hover:bg-gray-800 transition"
+          >
+            Contact Us
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}

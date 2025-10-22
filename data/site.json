@@ -2,7 +2,7 @@
   "site": {
     "name": "ElixFit Club",
     "baseUrl": "https://elixfit.elixflare.com",
-    "logo": "/logo/logo.png"
+    "logo": "/og.png"
   },
   "nav": [
     {
@@ -37,11 +37,7 @@
       "duration": "45 mins",
       "schedule": "Mon/Wed/Fri \u2014 6:00 AM",
       "thumbnail": "/images/classes/hiit.png",
-      "tags": [
-        "HIIT",
-        "Cardio",
-        "Metcon"
-      ],
+      "tags": ["HIIT", "Cardio", "Metcon"],
       "shortDescription": "High-intensity intervals to torch calories and boost endurance.",
       "description": "HIIT Burn alternates intense bursts with quick recovery to push your limits safely. Build stamina and burn fat efficiently.",
       "highlights": [
@@ -57,10 +53,7 @@
       "duration": "60 mins",
       "schedule": "Tue/Thu \u2014 5:30 PM",
       "thumbnail": "/images/classes/strength.png",
-      "tags": [
-        "Strength",
-        "Technique"
-      ],
+      "tags": ["Strength", "Technique"],
       "shortDescription": "Learn safe lifting technique and build total-body strength.",
       "description": "Perfect for newcomers or those returning from a break. Master the squat, hinge, push, and pull with proper form.",
       "highlights": [
@@ -76,18 +69,10 @@
       "duration": "40 mins",
       "schedule": "Sat \u2014 9:00 AM",
       "thumbnail": "/images/classes/mobility.png",
-      "tags": [
-        "Mobility",
-        "Recovery",
-        "Flexibility"
-      ],
+      "tags": ["Mobility", "Recovery", "Flexibility"],
       "shortDescription": "Feel better, move better\u2014guided mobility for joints and tissue.",
       "description": "Loosen tight hips and shoulders with a flow that blends stretches and breathwork to improve range of motion.",
-      "highlights": [
-        "Gentle flow",
-        "Breathwork",
-        "Great for rest days"
-      ]
+      "highlights": ["Gentle flow", "Breathwork", "Great for rest days"]
     }
   ],
   "about": {
