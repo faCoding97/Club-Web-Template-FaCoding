@@ -1,30 +1,78 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
-export default function MobileMenu({ open, setOpen, nav, site }) {
+type NavItem = { label: string; href: string };
+type SiteMeta = { name: string; logo: string };
+
+type MobileMenuProps = {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+  nav: NavItem[];
+  site: SiteMeta;
+};
+
+export default function MobileMenu({
+  open,
+  setOpen,
+  nav,
+  site,
+}: MobileMenuProps) {
+  const pathname = usePathname();
+
+  // ESC to close
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) =>
-      e.key === "Escape" && setOpen(false);
+    if (!open) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
-  }, [setOpen]);
+  }, [open, setOpen]);
+
+  // Lock body scroll when open
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
+  // Close on route change
+  useEffect(() => {
+    if (open) setOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  // case-insensitive filter to hide "Contact"
+  const menuItems = (nav ?? []).filter(
+    (i) => i.label?.toLowerCase() !== "contact"
+  );
 
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile menu"
       className={`fixed inset-0 z-50 transition-all duration-300 ${
         open ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
     >
-      {/* بک‌دراپ تیره */}
-      <div
+      {/* Backdrop */}
+      <button
+        type="button"
+        aria-label="Close menu"
         onClick={() => setOpen(false)}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
 
-      {/* پنل منو */}
-      <div
+      {/* Panel */}
+      <aside
         className={`absolute right-0 top-0 h-full w-72 bg-white shadow-2xl border-l border-gray-200 transform transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         } flex flex-col`}
@@ -53,19 +101,20 @@ export default function MobileMenu({ open, setOpen, nav, site }) {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-2 p-4 bg-gray-50 text-gray-900">
-          {nav
-            .filter((i) => !["contact", "Contact", "CONTACT"].includes(i.label))
-            .map((i) => (
-              <Link
-                key={i.href}
-                href={i.href}
-                onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-2 text-gray-800 hover:bg-gray-100 font-medium transition"
-              >
-                {i.label}
-              </Link>
-            ))}
+        <nav
+          className="flex flex-col gap-2 p-4 bg-gray-50 text-gray-900"
+          aria-label="Mobile"
+        >
+          {menuItems.map((i) => (
+            <Link
+              key={i.href}
+              href={i.href}
+              onClick={() => setOpen(false)}
+              className="block rounded-lg px-3 py-2 text-gray-800 hover:bg-gray-100 font-medium transition"
+            >
+              {i.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="mt-auto border-t border-gray-200 p-4 bg-gray-50 text-gray-900">
@@ -77,7 +126,7 @@ export default function MobileMenu({ open, setOpen, nav, site }) {
             Contact Us
           </Link>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }
